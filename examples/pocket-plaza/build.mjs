@@ -324,6 +324,7 @@ function pole() {
 }
 
 // ---------------------------------------------------------------- shadows
+const mm = (points) => points.map((point) => point.map((v) => Math.round(v * 10) / 10));
 const CASTERS = [
   s.ellipsoidPoints(CANOPY.c, CANOPY.r),
   s.boxPoints(TREE[0] - 160, TREE[1] - 160, SOIL_Z, TREE[0] + 160, TREE[1] + 160, TRUNK_TOP),
@@ -334,11 +335,11 @@ const CASTERS = [
   s.boxPoints(POLE[0] - 520, POLE[1] - 90, POLE_H - 40, POLE[0] + 40, POLE[1] + 90, POLE_H + 40),
   s.personPoints(SEATED.at, { pose: "sit", facing: Math.atan2(SEATED.face[1], SEATED.face[0]) }),
   s.personPoints(STANDING.at, { pose: "stand", facing: Math.atan2(STANDING.face[1], STANDING.face[0]) }),
-];
+].map(mm);
 // What can shade the seat: the crown, the trunk and the light.
 const OVER_SEAT = [0, 1, CASTERS.length - 4, CASTERS.length - 3];
 const SEAT_SAMPLES = [];
-for (let i = 0; i < 18; i++) for (let j = 0; j < 4; j++) SEAT_SAMPLES.push([BENCH.x0 + 50 + (i * (BENCH.x1 - BENCH.x0 - 100)) / 17, BENCH.y0 + 40 + (j * (BENCH.y1 - BENCH.y0 - 80)) / 3]);
+for (let i = 0; i < 18; i++) for (let j = 0; j < 4; j++) SEAT_SAMPLES.push([Math.round(BENCH.x0 + 50 + (i * (BENCH.x1 - BENCH.x0 - 100)) / 17), Math.round(BENCH.y0 + 40 + (j * (BENCH.y1 - BENCH.y0 - 80)) / 3)]);
 
 function shadeAt(hour) {
   const sun = s.sunAt(LATITUDE, DAY, hour);
