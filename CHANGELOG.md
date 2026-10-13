@@ -6,6 +6,7 @@ All notable changes to Anatomy are recorded here. The format follows [Keep a Cha
 
 ### Added
 
+- Landscape figures: `kit/landscape.mjs` (sun position and ground shadows, running-bond paving, section strata, lobed crowns and shrubs, grass, scale figures), the `pocket-plaza` example with a sun slider, and `references/landscape.md`.
 - Antigravity support, alongside Claude Code, OpenCode and Codex. Documented user and project installation paths in the README and CONTRIBUTING, updated SKILL.md compatibility, and added Antigravity to the bug report form.
 
 ### Changed

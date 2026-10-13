@@ -20,6 +20,7 @@ Eight complete examples ship with the skill. Open the closest one before you sta
 - `examples/ripple-tank/` is a school ripple tank on tall legs over a paper screen, seen from 44° up. Two WebGL layers (lamp light, shadows and caustics on the paper, and the water's reflections and glass) are registered to the isometric planes and driven by a pure dispersion and optics model (`model.mjs`); a frequency change travels out from the dippers through a history texture.
 - `examples/test-rig/` is a production figure from a real site (React/Next): a glass button on a spring-mounted carriage, a finger probe on a rail that presses and pulls, and a dial gauge reading the lean. It has 53 solids and about 470 paths.
 - `examples/spot-plate/` is a second production figure from the same site: six pairs of glass drops on a spot plate, each pair drawn from one distance field, so a pair closer than `merge` runs together into one piece of glass. A fan of feeler blades sets `merge`, one blade per gap. It is the reference for shapes that morph into each other and for one control driving many parts.
+- `examples/pocket-plaza/` is the landscape reference: a 6 × 4 m plaza as a sectional axo, with a tree in a raised bed behind a timber-topped seat wall, a bench, a light pole, a trench drain, two scale figures and the paving build-up cut open at the front. Moving the sun through June 21 at 49° N moves every shadow, and the readout is the share of the bench seat in shade. Read `references/landscape.md` first.
 - `examples/turning-dial/` is the optional 3D mode: a combination dial that turns in true 3D with a small robot hand on it. It has about 90 live parts in metal materials, a second turn group, a hinge, a three-hinge finger that lifts and a pod that breaks off as a free body. A WebGL LED, its light pool and sparks follow the moving parts. `stress.mjs` beside it is a dense hand of about 380 parts in a cluttered workshop, used to measure performance.
 
 The test rig is the quality bar for the drawing itself. The Raptor is the bar for shader work: a WebGL effect has to reach its standard of world-space, no-pop, seamless rendering.
@@ -121,6 +122,16 @@ These are the rules that separate a crafted figure from a diagram. `references/c
 - **Volume.** Give things real thickness, make them stand on other things, and put a soft halo under the base and under anything lifted.
 - **Composition.** Centre the figure and let it fill about 55–65% of the card. Keep a consistent scale across a set of figures, and make sure it still reads at 390 px wide.
 
+## Landscape: places instead of machines
+
+For small outdoor places, site furnishings and construction build-ups, the subject is real, so don't invent a machine: **the place is the explanation**. Pick the one question the figure answers (is the bench shaded at 2 pm, where does the water go, what is under the paving, how is the bench fixed) and let that set what moves and what the readout says.
+
+- Work in millimetres, x east, y north, z up, and use `kit/landscape.mjs` (`landscapeScript()` to inline it): `sunAt` and `shadowsOf` for sun studies, `pavingJoints` for unit paving, `strataTexture` for the cut faces of the build-up, `lobesOf` and `lobedSvg` for crowns and shrubs, `grassClump`, `stipple`, `sphereSvg` and `personPoints` for scale figures, and `SITE_CSS`.
+- Cut the ground open on the two faces toward the viewer and show the real layers. Turn trunks with `G.solidOf`. Draw shadows after the paving, clipped to the plinth.
+- Every dimension is real (riser, tread, seat height, slope, layer depths), and the caption says which are assumed.
+
+`references/landscape.md` has the full guide.
+
 ## WebGL inside the drawing
 
 Use a shader only for what lines can't draw: fire and exhaust, water and caustics, real lamp light, glow, steam. The parts stay SVG. The core rules come from the first shader figure, whose colour change between phases looked cut rather than crossfaded:
@@ -170,4 +181,5 @@ Read these as you need them:
 - `references/webgl.md`: shaders inside the drawing: when one earns its place, the layer stack, the camera contract, ray-marching in the iso camera, the full API with a minimal page, the craft rules with the bugs that taught them, the light theme (inks on paper, per-phenomenon recipes, the reviewers' faults), and how to verify them.
 - `references/walkthrough.md`: how the test rig was designed, step by step, from concept to code.
 - `references/3d.md`: the optional 3D mode: groups and poses, live layers, convex parts and their rules, materials, free groups, hinge chains, painter's order, static clutter around a turntable, shaders that follow the turn, the orbit audit, browser checks, performance and limits.
+- `references/landscape.md`: landscape figures: the place as the explanation, units and axes, the cut ground and its layers, paving, planting, furnishings and scale figures, sun and shadow, and the extra checks.
 - `references/publish.md`: sharing a finished figure in the community gallery with `scripts/publish.mjs`, only when the user asks; nothing is pushed for them.

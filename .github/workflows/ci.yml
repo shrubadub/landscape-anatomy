@@ -64,6 +64,11 @@ jobs:
           node examples/raptor-engine/build.mjs
           node examples/raptor-engine/build.mjs --light
 
+      - name: Pocket plaza
+        run: |
+          node examples/pocket-plaza/build.mjs
+          node examples/pocket-plaza/build.mjs --light
+
       - name: Committed pages are unchanged
         run: |
           git status --short
